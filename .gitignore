@@ -1,0 +1,7 @@
+# Python modules:
+.venv/
+*.pyc
+__pycache__/
+
+# Databases:
+*.sqlite3
