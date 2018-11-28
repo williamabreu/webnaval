@@ -140,6 +140,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.PlayerForm'
+
 SITE_ID = 1
 
 # Internationalization
