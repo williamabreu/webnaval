@@ -5,3 +5,6 @@ __pycache__/
 
 # Databases:
 *.sqlite3
+
+# Secret keys:
+*/keys.py
