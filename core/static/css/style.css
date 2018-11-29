@@ -1,18 +1,45 @@
 .center {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+.title-font{
+	font-weight: 100;
+	font-size: 60px;
+}
+
+.subtitle-font{
+	font-size: 30px;
+	font-weight: 200;
+	text-decoration: underline dotted;
+}
+
+.undertitle-font{
+	font-size: 20px;
 }
 
 .black{
 	background-color: black;
 }
 
+.cor-azul-claro{
+	background-color: #a4d5e7da;
+}
+
+.cor-verde-claro{
+	background-color: #61d46ada !important;
+}
+
+.cor-vermelho-claro{
+	background-color: #c24a4ada !important;
+}
+
 .cor-cinza-claro{
-	background-color: #e0e0d1;
+	background-color: #999b9c  !important;
 }
 
 .cor-cinza-escuro{
-	background-color: #737373;
+	background-color: #3d3c3c;
 }
 
 .unit{
@@ -22,29 +49,97 @@
 	margin: 3px;
 }
 
-.margin-left-30{
-	margin-left: 30%;
+.my-unit{
+	width: 100px;
+	height: 60px;
+	border: 2px solid black;
+	margin: 3px;
 }
 
-.unit:hover {
-    background-color: #ffb3b3;
-    transition: 0.5s;
+.unit-enemy{
+	width: 50px;
+	height: 30px;
+	border: 1px solid black;
+	margin: 2px;
+}
+
+.margin-left-30{
+	margin-left: 10%;
+}
+
+.unit:hover, .my-unit:hover {
+    background-color: #eaee1ed7;
     transform: 1.5;
 }
 
+
 .button{
-	background: blue;
-	width: 80px;
+	background: rgb(20, 47, 134);
+	width: 150px;
 	color: white;
-	margin-top: 50px;
-	margin-left: 45%;
+	margin-left: 35%;
 	text-align: center;
+	clear: left;
+	margin-top: 30px;
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+	border-radius: 10px;
+	height: 50px;
+	padding: 11px;
 }
 
-.cor-azul-escuro{
-	background: blue;
+.button:hover{
+	transform: scale(1.05);
+	transition: 0.3s;
 }
 
+.info{
+	width: 400px;
+	float: left;
+	clear: right;
+	background-color: #999b9c;
+	border: 1px solid black;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
+
+.large{
+	font-weight: 500;
+}
+
+.padding-15{
+	padding: 15px;
+}
+
+.float-left{
+	float: left;
+	clear: right;
+}
+
+.white{
+	color: white;
+}
+
+.radio input{
+	margin-bottom: 20px;
+}
+
+.map{
+	width: 700px;
+	float: left;
+}
+
+.block{
+	margin-bottom: 50px;
+}
+
+.clear-right{
+	clear: right;
+}
+
+.transparent{
+	background-color: white !important;
+	border: 1px solid white !important;
+	box-shadow: 5px 5px 5px white !important;
+}
 
 @media (max-width: 600px){
 
@@ -53,7 +148,4 @@
 		height: 30px;
 	}
 
-	.margin-left-30{
-		margin-left: 30%;
-	}
 }
