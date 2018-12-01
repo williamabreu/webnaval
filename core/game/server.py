@@ -1,3 +1,5 @@
+from .player import BattlePlayer
+
 class Server:
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, '_instance'):
@@ -39,4 +41,7 @@ class Server:
         for battleplayer in self.__players_waiting:
             if battleplayer.get_id() == model_player.id:
                 return battleplayer
-        return False
+        else:
+            bp = BattlePlayer(model_player)
+            self.player_join(bp)
+            return bp

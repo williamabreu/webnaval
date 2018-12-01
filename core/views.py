@@ -41,9 +41,9 @@ def post_fleet(request):
     if request.method == 'POST':
         user = Player.objects.get(user=request.user.id)
         server = Server()
-        battleplayer = server.get_battle_player(user)
+        battleplayer = server.get_battle_player(user)        
         board = battleplayer.get_board()        
-        positions = request.POST['position']
+        positions = [int(x) for x in request.POST['positions[]']]
 
         board.insert_fleet(positions)
 
