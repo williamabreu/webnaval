@@ -10,10 +10,34 @@
 </head>
 <body>
     <h1>Web Naval</h1>
-    <p>Startpage</p>
-    <a href="/accounts/logout">LOGOUT</a>
+    <p>{{ user.user.username }} - {{ user.user.email }}</p>
 
-    <p>{{ user.score }}</p>
-    <p>{{ user.games_played }}</p>
+    <br>
+
+    <a href="/disconnect">DESCONECTAR</a>
+
+    <br>
+    <br>
+
+    <a href="#">JOGAR</a>
+
+    <br>
+    <br>
+    <br>
+    
+    <p><strong>Score:</strong> {{ user.score }} </p>
+    <p><strong>Games Played:</strong> {{ user.games_played }} </p>
+    <p><strong>Online:</strong> {{ server.count_players }} </p>
+
+    <br>
+    <br>
+    <br>
+
+    <ol>
+    {% for player in ranking %}
+        <li>{{ player.user.username }}  {{ player.score }}</li>
+    {% endfor %}
+    <ol>
+
 </body>
 </html>
