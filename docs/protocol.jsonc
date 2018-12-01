@@ -1,0 +1,36 @@
+{
+    "enviar uma embarcação ao tabuleiro": {
+        "/ajax/post/fleet": {
+            "REQUEST": {
+                "positions": [],
+                "csrfmiddlewaretoken": ""
+            },
+            "RESPONSE": {
+                "message": ""
+            }
+        },
+    },
+
+    "atacar uma posição": {
+        "/ajax/post/attack/": {
+            "REQUEST": {
+                "position": 0,
+                "csrfmiddlewaretoken": ""
+            },
+            "RESPONSE": {
+                "message": "",
+                "hit": false,
+                "endgame": false
+            }
+        },
+    },
+
+    "consultar o estado da batalha": {
+        "/ajax/get/status/": {
+            "RESPONSE": {
+                "positionAttacked": 0,
+                "token": ""
+            }
+        },
+    }
+}
