@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import index
+from core.views import *
 
 urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('disconnect/', disconnect),
+    path('joingame/', join_game),
+    
+    path('ajax/post/fleet/', post_fleet),
 ]
