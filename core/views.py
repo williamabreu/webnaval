@@ -64,3 +64,10 @@ def join_game(request):
         return JsonResponse({
             'key': None
         })
+    return render(request, 'core/index.html')
+
+def fleet(request):
+    return render(request, 'core/tela.html')
+
+def battle(request):
+    return render(request, 'core/battle.html')

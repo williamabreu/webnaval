@@ -22,8 +22,13 @@ urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    
     path('disconnect/', disconnect),
+
     path('joingame/', join_game),
     
-    path('ajax/post/fleet/', post_fleet),
+    path('fleet/', fleet),
+    path('battle/',battle),
+    
+    path('ajax/post/fleet/', post_fleet)
 ]
