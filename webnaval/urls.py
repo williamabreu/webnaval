@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import index, fleet, battle, post_fleet
+from core.views import index, fleet, battle, post_fleet, post_battle_attack, start
 
 urlpatterns = [
     path('', index),
@@ -24,5 +24,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('fleet/', fleet),
     path('battle/',battle),
-    path('ajax/post/fleet/', post_fleet)
+    path('ajax/post/fleet/', post_fleet),
+    path('ajax/post/battle/attack/', post_battle_attack),
+    path('ajax/post/start/', start)
 ]

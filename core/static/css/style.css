@@ -101,6 +101,15 @@
 	box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 }
 
+.adv{
+	width: 400px;
+	float: left;
+	clear: right;
+	background-color: #999b9c;
+	border: 1px solid black;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
+
 .large{
 	font-weight: 500;
 }
@@ -141,11 +150,99 @@
 	box-shadow: 5px 5px 5px white !important;
 }
 
+@media (max-width: 1300px){
+	.info{
+		margin-left: 100px;
+	}
+
+	.adv{
+		width: 700px;
+		margin-left: 1%;
+	}
+
+	.unit-enemy{
+		width: 100px;
+		height: 60px;
+	}
+}
+
+@media (max-width: 800px){
+	
+	.unit{
+		width: 80px;
+		height: 48px;
+	}
+	.my-unit{
+		width: 80px;
+		height: 48px;
+	}
+	.unit-enemy{
+		width: 80px;
+		height: 48px;
+	}
+	.info{
+		width: 350px;
+		margin-left: 30px;
+	}
+	
+}
+
 @media (max-width: 600px){
 
 	.unit{
 		width: 50px;
 		height: 30px;
 	}
+	.my-unit{
+		width: 50px;
+		height: 30px;
+	}
+	.unit-enemy{
+		width: 50px;
+		height: 30px;
+	}
+	.info{
+		width: 300px;
+	}
+	.white{
+		font-size: 15px;
+	}
 
+	.button{
+		width: 120px;
+		margin-top: 20px;
+		border-radius: 8px;
+		height: 40px;
+		padding: 10px;
+		font-size: 15px;
+	}
+
+	.adv{
+		width: 100%;
+	}
+
+	.info{
+		width: 100%;
+	}
+
+	.map{
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 400px){
+	.unit{
+		width: 40px;
+		height: 20px;
+	}
+	.my-unit{
+		width: 40px;
+		height: 20px;
+	}
+	.unit-enemy{
+		width: 40px;
+		height: 20px;
+	}
+	
 }

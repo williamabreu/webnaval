@@ -17,3 +17,14 @@ def battle(request):
 def post_fleet(request):
     if request.method == 'POST':
         return HttpResponse()
+
+def post_battle_attack(request):
+    if request.method == 'POST':
+        return JsonResponse({
+            'hit': True,
+            'status': "You ",
+        })
+
+def start(request):
+    if request.method == 'POST':
+        return HttpResponse()
