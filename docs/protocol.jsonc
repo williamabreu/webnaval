@@ -25,7 +25,7 @@
         },
     },
 
-    "consultar o estado da batalha": {
+    "consultar o estado se foi atacado": {
         "/ajax/get/status/": {
             "RESPONSE": {
                 "positionAttacked": 0,

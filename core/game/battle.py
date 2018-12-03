@@ -1,8 +1,7 @@
 class Battle:
     def __init__(self, player1, player2):
-        self.__players = (player1, player2)
-        self.__round = 0
-    
-    def next_play(self):
-        if self.__round == 1:
+        self.player1 = player1
+        self.player2 = player2
+        self.endgame = False
+        self.round = 0
             

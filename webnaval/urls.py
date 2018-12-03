@@ -19,16 +19,18 @@ from django.urls import path, include
 from core.views import *
 
 urlpatterns = [
-    path('', index),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     
+    path('', index),
     path('disconnect/', disconnect),
 
+    path('startgame/', start_game),
     path('joingame/', join_game),
-    
-    path('fleet/', fleet),
     path('battle/',battle),
     
-    path('ajax/post/fleet/', post_fleet)
+    path('ajax/post/fleet/', post_fleet),
+    path('ajax/post/attack/', post_fleet),
+    path('ajax/get/status/', post_fleet),
+
 ]

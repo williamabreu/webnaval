@@ -25,4 +25,4 @@ class Board:
         return True # todas as embarcações foram destruídas
     
     def __repr__(self):
-        return ('{} {} {} {} {} {}\n' * 6).format(*self.__matrix)
+        return '{} {} {} {} {} {}\n{} {} {} {} {} {}\n{} {} {} {} {} {}\n{} {} {} {} {} {}\n{} {} {} {} {} {}\n{} {} {} {} {} {}\n'.format(*self.__matrix)
