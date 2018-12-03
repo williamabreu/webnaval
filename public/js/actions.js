@@ -45,34 +45,47 @@ $("#confirma").click(function(){
 	});
 }); 
 
-//funcao de batalha
+$("#start").click(function(){
+	$.ajax({
+		type: "POST",
+		url: "/ajax/post/start/",
+		data: {
+			ready: true,
+			csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val() 
+		},
+		success: function() {
+			alert("Inicio confirmado. OBS");
+		}
+	})
+});
+
+
+//funcao de ataque batalha
 $(".my-unit").click(function(){
 	if($(this).hasClass("cor-azul-claro")){
-		var cont = 0;
-		$( ".my-unit" ).each(function( index ){
-			if($(this).hasClass("cor-verde-claro")){
-				cont++;
-			}
-		});
-		console.log(cont);
-		if(cont < 14){
-			$(this).removeClass("cor-azul-claro");
-			if(Math.floor(Math.random() * 10 <=4)){ // substituir random por funcao real
-				$(this).addClass("cor-vermelho-claro");
-			}else{
-				$(this).addClass("cor-verde-claro");
-			}
-		}else{
-			if(cont == 14){
-				if(Math.floor(Math.random() * 10 <=4)){  // substituir random por funcao real
-					$(this).addClass("cor-vermelho-claro");
+		var element = $(this);
+		element.removeClass("cor-azul-claro");
+		var id = element.attr('id');
+		console.log(id)
+		$.ajax({
+			type: "POST",
+			url: "/ajax/post/battle/attack/",
+			data: {
+				position: id,
+				csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val() 
+			},
+			success: function(data) {
+				if(data['hit']){
+					element.addClass("cor-verde-claro");
 				}else{
-					$(this).addClass("cor-verde-claro");
-					alert("Você venceu, jogo encerrado");
+					element.addClass("cor-vermelho-claro");
+				}
+				if(data['status'] == "You won"){
+					alert("Você venceu o jogo");
+				}else if(data['endgame'] == "You lost"){
+					alert("Você perdeu o jogo");
 				}
 			}
-		}
-		
+		})
 	}
 }); 
-
