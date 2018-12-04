@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
         user.board = user.board.concat(positions);
         console.log(socket.id + ' postfleet ' + positions);
         console.log(user.board.length);
-        if (user.board.length == 1) {
+        if (user.board.length == 10) {
             let status = game.joinRoom(user);
 
             // envia info de volta somente para ele
@@ -90,7 +90,7 @@ io.on('connection', function(socket) {
             opponent = room.player2;
         }
         else if (room.player2 == user && room.round == 2) {
-            opponent = room.player2;
+            opponent = room.player1;
         }
         else {
             // proibido
@@ -115,6 +115,7 @@ io.on('connection', function(socket) {
                 });
                 io.emit('enemyattack', {
                     roomId: room.token,
+                    target: opponent.id,
                     position: pos,
                     hitted: true
                 });
@@ -126,6 +127,7 @@ io.on('connection', function(socket) {
                 });
                 io.emit('enemyattack', {
                     roomId: room.token,
+                    target: opponent.id,
                     position: pos,
                     hitted: false
                 });
