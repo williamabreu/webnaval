@@ -49,9 +49,14 @@ io.on('connection', function(socket) {
 
             if (status == 'ready') {
                 // enviar iniciar partida em broadcast
-                let roomToken = game.getRoom(user.roomId).token;
+                let room = game.getRoom(user.roomId);
+                let roomToken = room.token;
+
+                room.round = 1
+
                 io.emit('startgame', {
-                    roomId: roomToken
+                    roomId: roomToken,
+                    round: room.player1.id
                 });
             }
             
@@ -75,34 +80,62 @@ io.on('connection', function(socket) {
     // }); 
 
     // DISPARA O EVENTO DE ATAQUE
-    socket.on('attack', function(msg) {
-        let opponent = game.getOpponent(socket.id);
+    socket.on('attack-request', function(msg) {
+        // let opponent = game.getOpponent(socket.id);
+        let user = game.getUser(socket.id);
+        let room = game.getRoom(user.roomId);
+        let opponent;
+        
+        if (room.player1 == user && room.round == 1) {
+            opponent = room.player2;
+        }
+        else if (room.player2 == user && room.round == 2) {
+            opponent = room.player2;
+        }
+        else {
+            // proibido
+            return;
+        }
+        
         console.log(opponent);
+
         if (opponent != null) {
             let pos = msg.position;
-            console.log(pos);
-            if(Math.floor((Math.random() * 10) + 1) > 5){
-                socket.emit('attackresponse', {
+            let index = opponent.board.indexOf(pos);
+            console.log('pos', pos);
+            console.log('index', index);
+
+            if (index != -1) {
+                opponent.board.splice(index, 1);
+
+                socket.emit('attack-response', {
                     position: pos,
                     hitted: true
                 });
-                socket.broadcast.emit('enemyattack', {
+                io.emit('enemyattack', {
+                    roomId: room.token,
                     position: pos,
                     hitted: true
                 });
-            }else{
-                socket.emit('attackresponse', {
+            }
+            else { 
+                socket.emit('attack-response', {
                     position: pos,
                     hitted: false
                 });
-                socket.broadcast.emit('enemyattack', {
+                io.emit('enemyattack', {
+                    roomId: room.token,
                     position: pos,
                     hitted: false
                 });
             }
-        }
-        else {
-            socket.emit('startgame', {status: false});
+
+            if (room.round == 2) {
+                room.round = 1;
+            }
+            else {
+                room.round = 2;
+            }
         }
     }); 
 });

@@ -17,6 +17,7 @@ getSocketId();
 socket.on('general', function(msg) {
 	console.log('general', msg);
 	room = msg.roomId;
+	$('#message-frame-1').text('Aguardando oponente...')
 });
 
 socket.on('startgame', function(msg) {
@@ -24,12 +25,20 @@ socket.on('startgame', function(msg) {
 		$('#subtitle').text('Batalha');
 		$('#frame-1').hide();
 		$('#frame-2').show();
+		alert('O jogo começou!');
+
+		if (sid == msg.round) {
+			$('#message-frame-2').text('Sua vez de atacar');
+		}
+		else {
+			$('#message-frame-2').text('Aguarde seu adversário');
+		}
 	}
 
 	console.log('startgame', msg);
 });
 
-socket.on('attackresponse', function(msg){
+socket.on('attack-response', function(msg){
 	let str = "#oponnent-map-" + msg.position;
 	$(str).removeClass("cor-azul-claro");
 	if(msg.hitted == true){
@@ -41,12 +50,14 @@ socket.on('attackresponse', function(msg){
 });
 
 socket.on('enemyattack', function(msg){
-	let str = "#my-map-" + msg.position;
-	$(str).removeClass("cor-azul-claro");
-	if(msg.hitted == true){
-		$(str).addClass("cor-verde-claro");
-	}else{
-		$(str).addClass("cor-vermelho-claro");
+	if (room == msg.roomId) {
+		let str = "#my-map-" + msg.position;
+		$(str).removeClass("cor-azul-claro");
+		if (msg.hitted == true) {
+			$(str).addClass("cor-verde-claro");
+		} else {
+			$(str).addClass("cor-vermelho-claro");
+		}
 	}
 	console.log(msg);
 });
@@ -107,7 +118,7 @@ $(".my-unit").click(function(){
 		number = id.substr(13);
 		console.log(id)
 		
-		socket.emit('attack', {
+		socket.emit('attack-request', {
 			position: number
 		});
 	}
