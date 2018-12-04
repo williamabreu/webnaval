@@ -25,7 +25,7 @@ http.listen(3000, function(){
 io.on('connection', function(socket) {
     console.log('user    connected ' + socket.id);
     game.connectUser(socket.id);
-
+    
     socket.on('disconnect', function() {
         console.log('user disconnected ' + socket.id);
         game.disconnectUser(socket.id);
@@ -39,22 +39,41 @@ io.on('connection', function(socket) {
         console.log(socket.id + ' postfleet ' + positions);
         console.log(user.board.length);
         if (user.board.length == 1) {
-            io.emit('startgame', {status: 'ready'});
-            console.log(socket.id + ' ready!');
+            let status = game.joinRoom(user);
+
+            // envia info de volta somente para ele
+            socket.emit('general', {
+                status: status,
+                roomId: game.getRoom(user.roomId).token
+            })
+
+            if (status == 'ready') {
+                // enviar iniciar partida em broadcast
+                let roomToken = game.getRoom(user.roomId).token;
+                io.emit('startgame', {
+                    roomId: roomToken
+                });
+            }
+            
+            // enviar aguardar oponente
+            
+             
+            // console.log(socket.id + ' ready!');
         }
     });
 
     // DISPARA EVENTO ASSINCRONO
-    socket.on('startgame', function(msg) {
-        let opponent = game.getOpponent(socket.id);
-        console.log(opponent);
-        if (opponent != null) {
-            io.emit('startgame', {status: true});
-        }
-        else {
-            socket.emit('startgame', {status: false});
-        }
-    }); 
+    // socket.on('startgame', function(msg) {
+    //     let opponent = game.getOpponent(socket.id);
+    //     console.log(opponent);
+    //     if (opponent != null) {
+    //         io.emit('startgame', {status: true});
+    //     }
+    //     else {
+    //         socket.emit('startgame', {status: false});
+    //     }
+    // }); 
+
     // DISPARA O EVENTO DE ATAQUE
     socket.on('attack', function(msg) {
         let opponent = game.getOpponent(socket.id);

@@ -1,16 +1,32 @@
 // socket io
 
 const socket = io();
+var room;
+var sid;
 
-$('form').submit(function(){
-	socket.emit('chat message', $('#m').val());
+function getSocketId() {
+    if (!socket.id) {
+        return setTimeout(getSocketId, 500);
+    }
+
+    sid = socket.id;
+}
+
+getSocketId(); 
+
+socket.on('general', function(msg) {
+	console.log('general', msg);
+	room = msg.roomId;
 });
 
-socket.on('startgame', function(msg){
-	$('#subtitle').text('Batalha');
-	$('#frame-1').hide();
-	$('#frame-2').show();
-	console.log(msg);
+socket.on('startgame', function(msg) {
+	if (room == msg.roomId) {
+		$('#subtitle').text('Batalha');
+		$('#frame-1').hide();
+		$('#frame-2').show();
+	}
+
+	console.log('startgame', msg);
 });
 
 socket.on('attackresponse', function(msg){
