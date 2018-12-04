@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
         user.board = user.board.concat(positions);
         console.log(socket.id + ' postfleet ' + positions);
         console.log(user.board.length);
-        if (user.board.length == 15) {
+        if (user.board.length == 1) {
             io.emit('startgame', {status: 'ready'});
             console.log(socket.id + ' ready!');
         }
@@ -50,6 +50,37 @@ io.on('connection', function(socket) {
         console.log(opponent);
         if (opponent != null) {
             io.emit('startgame', {status: true});
+        }
+        else {
+            socket.emit('startgame', {status: false});
+        }
+    }); 
+    // DISPARA O EVENTO DE ATAQUE
+    socket.on('attack', function(msg) {
+        let opponent = game.getOpponent(socket.id);
+        console.log(opponent);
+        if (opponent != null) {
+            let pos = msg.position;
+            console.log(pos);
+            if(Math.floor((Math.random() * 10) + 1) > 5){
+                socket.emit('attackresponse', {
+                    position: pos,
+                    hitted: true
+                });
+                socket.broadcast.emit('enemyattack', {
+                    position: pos,
+                    hitted: true
+                });
+            }else{
+                socket.emit('attackresponse', {
+                    position: pos,
+                    hitted: false
+                });
+                socket.broadcast.emit('enemyattack', {
+                    position: pos,
+                    hitted: false
+                });
+            }
         }
         else {
             socket.emit('startgame', {status: false});

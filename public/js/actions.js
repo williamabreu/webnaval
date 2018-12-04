@@ -13,6 +13,28 @@ socket.on('startgame', function(msg){
 	console.log(msg);
 });
 
+socket.on('attackresponse', function(msg){
+	let str = "#oponnent-map-" + msg.position;
+	$(str).removeClass("cor-azul-claro");
+	if(msg.hitted == true){
+		$(str).addClass("cor-verde-claro");
+	}else{
+		$(str).addClass("cor-vermelho-claro");
+	}
+	console.log(msg);
+});
+
+socket.on('enemyattack', function(msg){
+	let str = "#my-map-" + msg.position;
+	$(str).removeClass("cor-azul-claro");
+	if(msg.hitted == true){
+		$(str).addClass("cor-verde-claro");
+	}else{
+		$(str).addClass("cor-vermelho-claro");
+	}
+	console.log(msg);
+});
+
 
 
 //funcao para selecao das embarcacoes candidatas
@@ -60,32 +82,17 @@ $("#start").click(function(){
 });
 
 
+
 //funcao de ataque batalha
 $(".my-unit").click(function(){
 	if($(this).hasClass("cor-azul-claro")){
-		var element = $(this);
-		element.removeClass("cor-azul-claro");
-		var id = element.attr('id');
+		let element = $(this);
+		let id = element.attr('id');
+		number = id.substr(13);
 		console.log(id)
-		$.ajax({
-			type: "POST",
-			url: "/ajax/post/battle/attack/",
-			data: {
-				position: id,
-				csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val() 
-			},
-			success: function(data) {
-				if(data['hit']){
-					element.addClass("cor-verde-claro");
-				}else{
-					element.addClass("cor-vermelho-claro");
-				}
-				if(data['status'] == "You won"){
-					alert("Você venceu o jogo");
-				}else if(data['endgame'] == "You lost"){
-					alert("Você perdeu o jogo");
-				}
-			}
-		})
+		
+		socket.emit('attack', {
+			position: number
+		});
 	}
 }); 
