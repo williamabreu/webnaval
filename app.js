@@ -100,10 +100,11 @@ io.on('connection', function(socket) {
         console.log(opponent);
 
         if (opponent != null) {
-            let pos = msg.position;
+            let pos = parseInt(msg.position);
             let index = opponent.board.indexOf(pos);
-            console.log('pos', pos);
-            console.log('index', index);
+            // console.log(opponent.board);
+            // console.log('pos', typeof pos, pos);
+            // console.log('index', index);
 
             if (index != -1) {
                 opponent.board.splice(index, 1);
