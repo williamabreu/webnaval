@@ -94,20 +94,6 @@ $("#confirma").click(function(){
 	});
 }); 
 
-$("#start").click(function(){
-	$.ajax({
-		type: "POST",
-		url: "/ajax/post/start/",
-		data: {
-			ready: true,
-			csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val() 
-		},
-		success: function() {
-			alert("Inicio confirmado. OBS");
-		}
-	})
-});
-
 
 
 //funcao de ataque batalha
@@ -116,7 +102,7 @@ $(".my-unit").click(function(){
 		let element = $(this);
 		let id = element.attr('id');
 		number = id.substr(13);
-		console.log(id)
+		// console.log(id);
 		
 		socket.emit('attack-request', {
 			position: number
